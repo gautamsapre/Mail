@@ -3,17 +3,23 @@
 
 {% block body %}
     <h2>{{ request.user.email }}</h2>
-
+    {{ request.user.email|json_script:"user_id" }}
+    <div id = "current-user" value= {{ request.user.email }}></div>
     <button class="btn btn-sm btn-outline-primary" id="inbox">Inbox</button>
     <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button>
     <button class="btn btn-sm btn-outline-primary" id="sent">Sent</button>
     <button class="btn btn-sm btn-outline-primary" id="archived">Archived</button>
     <a class="btn btn-sm btn-outline-primary" href="{% url 'logout' %}">Log Out</a>
-    <hr>
 
     <div id="emails-view">
     </div>
 
+    <div id="inbox-view">
+        {{request.user}}
+    </div>
+    <div id="sent-view">
+        {{request.user}}
+    </div>
     <div id="compose-view">
         <h3>New Email</h3>
         <form id="compose-form">
@@ -24,12 +30,11 @@
                 To: <input id="compose-recipients" class="form-control">
             </div>
             <div class="form-group">
-                <input class="form-control" id="composse-subject" placeholder="Subject">
+                <input class="form-control" id="compose-subject" placeholder="Subject">
             </div>
             <textarea class="form-control" id="compose-body" placeholder="Body"></textarea>
             <input type="submit" class="btn btn-primary" id="compose-submit"/>
         </form>
-        <h1 id="Beast">NONO</h1>
     </div>
 {% endblock %}
 
