@@ -68,13 +68,22 @@ hr.dashed {
     border-radius: 5px;
   }
 .wrapper{
-    width:350px;
-    outline: 1px solid #007bff ;
-
-    padding-right:100px;
+    width:325px;
+    outline: 1px solid #bbb ;
 }
 #From{
     padding-top:10px;
-    
 
+}
+#Date{
+    padding-bottom:10px
+}
+.info{
+    padding-left:10px;
+}
+.read{
+    background-color:rgb(228, 228, 228);
+}
+.unread{
+    background-color:rgb(255, 255, 255);
 }
