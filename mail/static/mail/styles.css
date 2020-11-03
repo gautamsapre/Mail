@@ -4,3 +4,77 @@ textarea {
 .kya {
     color: green ;
 }
+body {
+   
+}
+div {
+    margin: 0px;
+}
+   
+ul {
+list-style-type: none;
+width: 1000px;
+}
+
+h3 {
+font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
+}
+
+li img {
+
+margin: 0 15px 0 0;
+}
+
+li p {
+font: 200 12px/1.5 Georgia, Times New Roman, serif;
+}
+
+li {
+padding: 10px;
+overflow: auto;
+border: 1px solid black;
+}
+
+li:hover {
+background: #eee;
+cursor: pointer;
+}
+#inner{
+
+display: flex
+}
+.child {
+width: 500px;
+
+/* Just so it's visible */
+}
+.img{
+/* even more control with max-width */
+max-width: 500px;
+}
+.des {
+flex: 4;
+
+}
+.de{
+resize: horizontal;
+width: 200px;
+}
+#inbox-view{
+    padding-left: -20rem;
+}
+hr.dashed {
+    border-top: 10px dotted #bbb;
+    border-radius: 5px;
+  }
+.wrapper{
+    width:350px;
+    outline: 1px solid #007bff ;
+
+    padding-right:100px;
+}
+#From{
+    padding-top:10px;
+    
+
+}

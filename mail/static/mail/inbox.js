@@ -14,6 +14,7 @@ function compose_email() {
 
   // Show compose view and hide other views
   document.querySelector('#emails-view').style.display = 'none';
+  document.querySelector('#mail-view').style.display = 'none';
   document.querySelector('#compose-view').style.display = 'block';
   document.querySelector('#inbox-view').style.display = 'none';
   document.querySelector('#sent-view').style.display = 'none';
@@ -24,10 +25,11 @@ function compose_email() {
 }
 
 function load_mailbox(mailbox) {
-  
+  document.querySelector('#mail-view').style.display = 'none';
   // Show the mailbox and hide other views
   document.querySelector('#emails-view').style.display = 'block';
   document.querySelector('#compose-view').style.display = 'none';
+
   if (mailbox == 'inbox'){
     document.querySelector('#inbox-view').style.display = 'block';
     document.querySelector('#sent-view').style.display = 'none';
@@ -39,10 +41,10 @@ function load_mailbox(mailbox) {
       for (var i = 0; i<emails.length; i++){
         if ( emails[i].recipients.includes("\""+document.getElementById('user_id').textContent)+ "\""){
           console.log(emails[i].recipients);
-          store+="<div>"+emails[i].sender+": "+emails[i].subject+"</div>";
+          store+="<li onclick ='openMail("+emails[i].id+")'>"+emails[i].sender+": "+emails[i].subject+"</li>";
         }
       }
-      document.querySelector('#inbox-view').innerHTML = store;
+      document.querySelector('#inbox-view').innerHTML = "<ul>"+store+"</ul>";
     // ... do something else with emails ...
     });
   }
@@ -60,10 +62,10 @@ function load_mailbox(mailbox) {
       var store = "";
       for (var i = 0; i<emails.length; i++){
         if ( "\""+emails[i].sender+"\"" == (document.getElementById('user_id').textContent ) ){
-          store+="<div class = \"kya\" >" +emails[i].recipients+": "+emails[i].subject+"</div>";
+          store+="<li onclick ='openMail("+emails[i].id+")' class = \"kya\" >" +emails[i].recipients+": "+emails[i].subject+"</li>";
         }
       }
-      document.querySelector('#sent-view').innerHTML = store;
+      document.querySelector('#sent-view').innerHTML = "<ul>"+store+"</ul>";
     // ... do something else with emails ...
     });
   }
@@ -95,4 +97,26 @@ function addEmail(){
         console.log(result);
     });
     alert('Mail Sent');
+}
+function openMail(id){
+  document.querySelector('#inbox-view').style.display = 'none';
+  document.querySelector('#sent-view').style.display = 'none';
+
+  document.querySelector('#emails-view').style.display = 'none';
+  document.querySelector('#mail-view').style.display = 'block';
+  console.log(id);
+  fetch('/emails/'+id)
+  .then(response => response.json())
+  .then(email => {
+    document.querySelector('#From').innerHTML = "From: "+email.sender;
+    let rec = "";
+    for(var i = 0; i<email.recipients.length-1; i++){
+      rec+=email.recipients[i]+" ,";
+    }
+    rec+= email.recipients[email.recipients.length-1];
+    document.querySelector('#To').innerHTML = "To: "+rec;
+    document.querySelector('#Date').innerHTML = "Date: "+email.timestamp;
+    document.querySelector('#Subject').innerHTML = "Subject: "+email.subject;
+    document.querySelector('#Body').innerHTML = email.body;
+  });
 }

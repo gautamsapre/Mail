@@ -12,13 +12,26 @@
     <a class="btn btn-sm btn-outline-primary" href="{% url 'logout' %}">Log Out</a>
 
     <div id="emails-view">
-    </div>
 
+    </div>
+    <div id="mail-view">
+        <ul>
+        </br></br>
+           <div class = "wrapper"> 
+                <div id="From">From: </div>
+                <div id="To">To: </div>
+                <div id="Date">Date: </div>
+            </div>
+            </br></br>
+            <h5 id = "Subject"></h5>
+            <hr class="solid">
+                <div id ="Body"></div>
+            </hr>
+        </ul> 
+     </div>
     <div id="inbox-view">
-        {{request.user}}
     </div>
     <div id="sent-view">
-        {{request.user}}
     </div>
     <div id="compose-view">
         <h3>New Email</h3>
